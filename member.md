@@ -1,0 +1,1 @@
+| # 2. Sekarang daftarkan semua file (ini akan mengubah daftar.sh jadi hijau)git add .# 3. Kunci perubahannyagit commit -m "Hadir - Menambahkan sistem pendaftaran member"# 4. Kirim ke GitHubgit push origin masterjuri | 26 | L | 23-02-2026 |
