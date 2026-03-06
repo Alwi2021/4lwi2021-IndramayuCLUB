@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Piramida Guard 1-10 | Indramayu Club</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; text-align: center; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; padding: 20px; }
+        .nur-card { border: 1px solid #222; padding: 10px; border-radius: 10px; background: #050505; }
+        .nur-card:hover { border-color: #0f0; box-shadow: 0 0 10px #0f0; }
+        .nur-card img { width: 100%; height: auto; border-radius: 5px; border: 1px solid #111; }
+        .nur-name { margin-top: 8px; font-weight: bold; font-size: 11px; }
+        .satria { border-color: gold; color: gold; box-shadow: 0 0 5px gold; }
+    </style>
+</head>
+<body>
+
+    <h2 style="margin-top:20px;">🏛️ INDRAMAYU CLUB MAKRIFAT 🏛️</h2>
+    <p style="color:yellow; font-size:12px;">STATUS: UP ✅ | PIRAMIDA GUARD VERSION 33</p>
+
+    <div class="gallery">
+        <script>
+            const nurData = [
+                { id: 10, name: "NUR-SATRIA 01", class: "satria" },
+                { id: 9, name: "NUR 9 (AI MINI)" },
+                { id: 8, name: "NUR 8 (BACKUP)" },
+                { id: 7, name: "NUR 7 (KOMUNIKASI)" },
+                { id: 6, name: "NUR 6 (KAS 5%)" },
+                { id: 5, name: "NUR 5 (PEMBIMBING)" },
+                { id: 4, name: "NUR 4 (KREATOR)" },
+                { id: 3, name: "NUR 3 (KEUANGAN)" },
+                { id: 2, name: "NUR 2 (DISKUSI)" },
+                { id: 1, name: "NUR 1 (RUMAH NUR)" }
+            ];
+
+            nurData.forEach(nur => {
+                document.write(`
+                    <div class="nur-card ${nur.class || ''}">
+                        <img src="nomer ${nur.id}.jpeg" alt="Nomer ${nur.id}" onerror="this.src='https://via.placeholder.com/150/111/0f0?text=Nur+${nur.id}'">
+                        <div class="nur-name">${nur.name}</div>
+                    </div>
+                `);
+            });
+        </script>
+    </div>
+
+    <p style="margin-top:30px; color:#444;">Hadir Pak dulKohar - Sistem Terkunci.</p>
+
+</body>
+</html>
+
