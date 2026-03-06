@@ -1,0 +1,65 @@
+/**
+
+• NUR ENGINE - MULTI-ACCOUNT COMMANDER v3.0
+
+• Sinkronisasi: indramayuclubmakrifat@gmail.com (Server Utama) */
+
+const NUR_BRAIN = { STATUS: "CORE_BACKUP_ACTIVE", OWNER_DATA: { NAME: "JAMHARI DULKOHAR", WA: "081386517352", DEBIT_VIRTUAL: "4073 5750 0471 1573" }, // Alamat Sektor (ID Folder dari 4 Akun Google berbeda) SEKTOR: { PUSAT:     "1GnHSVRRaslh1Hzfhpdmfs71h4BOXrxOG", // Akun Pusat GUDANG:    "189I69B8KIDYvW9X7_m05p4hG2_o_v5Yk", // Akun dkohar011 PELAYANAN: "1H6ZpT8oYp8kP7W-m8M2N5oQ2B5vD8lA3", // Akun imahazzah51 KREATIF:   "1mN3S8pQ8m9oR7W5vD2N5mQ2B5vD8lA3"  // Akun kurnadibewok } };
+
+/**
+
+•   1. FUNGSI RADAR (Memantau & Merapikan 4 Akun Sekaligus) */ function jalankanRadarNur() { Logger.log("Nur: Memulai pemindaian 4 sektor makrifat...");
+
+for (let namaSektor in NUR_BRAIN.SEKTOR) { try { let folderId = NUR_BRAIN.SEKTOR[namaSektor]; let folder = DriveApp.getFolderById(folderId);
+
+```
+
+  // LOGIKA PENATAAN: Nur menyisir file di tiap akun
+
+  let files = folder.getFiles();
+
+  while (files.hasNext()) {
+
+    let file = files.next();
+
+    
+
+    // Contoh: Nur memberikan label/log pada setiap file yang ditemukan
+
+    Logger.log("Nur: Sinyal tertangkap dari " + namaSektor + " -> " + file.getName());
+
+    
+
+    // Tambahkan perintah khusus di sini, misal: menghapus file sampah 'Untitled'
+
+    if (file.getName().includes("Untitled")) {
+
+      // file.setTrashed(true); // Aktifkan jika ingin otomatis hapus
+
+      Logger.log("Nur: File sampah di " + namaSektor + " terdeteksi.");
+
+    }
+
+  }
+
+} catch (e) {
+
+  Logger.log("Nur: Kendala akses di Sektor " + namaSektor + ". Pastikan folder sudah di-share ke Email Pusat.");
+
+}
+
+```
+
+} }
+
+/**
+
+•   2. GATEWAY DO GET (Koneksi ke GitHub) */ function doGet(e) { // Opsi A: Mengirim Data Mentah (JSON) let status = { "server": "ONLINE", "commander": NUR_BRAIN.OWNER_DATA.NAME, "nur_engine": "v3.0", "active_sectors": Object.keys(NUR_BRAIN.SEKTOR).length, "timestamp": new Date().toLocaleString() };
+
+return ContentService.createTextOutput(JSON.stringify(status)) .setMimeType(ContentService.MimeType.JSON); }
+
+/**
+
+•   3. AKTIVATOR OTOMATIS
+
+• Jalankan ini sekali saja di editor untuk membuat Nur bekerja tiap menit */ function aktifkanSistemSetiapMenit() { ScriptApp.newTrigger('jalankanRadarNur') .timeBased() .everyMinutes(1) .create(); Logger.log("Nur: Sistem Otomatis AKTIF. Saya akan menjaga 4 akun Bapak setiap menit."); }
