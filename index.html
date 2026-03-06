@@ -1,134 +1,66 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piramida Guard - Indramayu Club</title>
+    <title>Indramayu CLUB</title>
     <style>
-        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; text-align: center; padding: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 20px; }
-        .card { border: 1px solid #0f0; padding: 10px; border-radius: 8px; background: #050505; transition: 0.3s; }
-        .card:hover { border-color: #fff; box-shadow: 0 0 10px #0f0; }
-        .satria { border-color: gold; color: gold; }
-        input { width: 100%; font-size: 10px; margin: 5px 0; background: #111; color: inherit; border: 1px solid #333; }
-        button { width: 100%; cursor: pointer; background: #000; color: inherit; border: 1px solid; font-weight: bold; padding: 5px; }
-        button:hover { background: #0f0; color: #000; }
-        .satria button:hover { background: gold; color: #000; }
-        #status { color: yellow; font-weight: bold; margin-top: 30px; border-top: 1px solid #222; padding-top: 10px; }
+        /* Add styles for smooth transitions and animations */
+        .reaction {
+            cursor: pointer;
+            transition: transform 0.2s; 
+        }
+        .reaction:hover {
+            transform: scale(1.2);
+        }
+        .comment-section {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
+    <h1>Indramayu CLUB</h1>
+    <!-- Existing Nur Upload functionality -->
+    <div id="upload-section">
+        <!-- Upload functionality here -->
+    </div>
 
-
-    <h3>🏛️ PIRAMIDA GUARD (V.33) 🏛️</h3>
-    <p style="font-size: 10px;">Operator: Nur | ID: AKfycb...GA</p>
-
-    <div class="grid" id="container"></div>
-
-    <div id="status">Hadir Pak dulKohar - Siap Perintah.</div>
+    <!-- Social Media Interaction Layer -->
+    <div id="reactions">
+        <span class="reaction" onclick="react('😂')">😂</span>
+        <span class="reaction" onclick="react('❤️')">❤️</span>
+        <span class="reaction" onclick="react('😍')">😍</span>
+        <span class="reaction" onclick="react('😢')">😢</span>
+        <span class="reaction" onclick="react('😡')">😡</span>
+        <span class="reaction" onclick="react('👍')">👍</span>
+    </div>
+    <div id="like-counter">Likes: <span id="like-count">0</span></div>
+    <div class="comment-section">
+        <h2>Comments:</h2>
+        <input type="text" id="comment-input" placeholder="Add a comment..." />
+        <button onclick="addComment()">Post</button>
+        <div id="comments-display"></div>
+    </div>
 
     <script>
-        // URL Web App Bapak yang sudah Aktif
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxqeA8-g6jV9xkRcfHFt5_XL4lNVfZvTlhGoazEQGB4qLJGrN3L58_QtN_ALEC26j_lGA/exec";
-
-        const configNur = {
-            10: { n: "SATRIA 01", f: "1-vfSMe4HLBRw_6xgHQuzL2MaL-QsmYyT", c: "satria" },
-            9:  { n: "NUR 9", f: "1D2jx-VV-AkPwc6rUtvabthyYc61Lw7Ti" },
-            8:  { n: "NUR 8", f: "15pynM8x7bca0deCVLjW6BhyqW51QZ76s" },
-            7:  { n: "NUR 7", f: "1AY5jD0Bb0ZMcUw2JTq5HpbNlZQ113P3n" },
-            6:  { n: "NUR 6", f: "1Gt21jF-4N-e0ep5U_ZwjtYHqIjXSgvPa" },
-            5:  { n: "NUR 5", f: "19sQU6y-_PD2Nj9-wRdsICh7LUyxtspia" },
-            4:  { n: "NUR 4", f: "1w4NdVPZVbdptFT_n3mtL0zxPQ_Uveuz" },
-            3:  { n: "NUR 3", f: "1v0Wc-oNUhJYHBIj9sP6KcmOXwNpHkzm_" },
-            2:  { n: "NUR 2", f: "19ezgJgH4kn7KV23NMaLsUnJVH18PMJT_" },
-            1:  { n: "NUR 1", f: "1-vfSMe4HLBRw_6xgHQuzL2MaL-QsmYyT" }
-        };
-
-        const container = document.getElementById('container');
-
-        // Render Tombol Nur 10 sampai 1
-        Object.keys(configNur).reverse().forEach(id => {
-            container.innerHTML += `
-                <div class="card ${configNur[id].c || ''}">
-                    <b>${configNur[id].n}</b><br>
-                    <input type="file" id="file${id}" accept="image/*">
-                    <button onclick="unggahKeNur(${id})">UNGGAH ${id}</button>
-                </div>
-            `;
-        });
-
-        function unggahKeNur(id) {
-            const fileInput = document.getElementById('file' + id);
-            const statusBox = document.getElementById('status');
-            const file = fileInput.files[0];
-
-            if (!file) { alert("Pilih foto Nomer " + id + " dulu, Pak!"); return; }
-
-            statusBox.innerText = "⏳ Nur " + id + " sedang mengirim ke Drive...";
-
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function(e) {
-                const base64Data = e.target.result.split(',')[1];
-
-                // Kirim data ke Google Apps Script (Web App)
-                fetch(WEB_APP_URL, {
-                    method: "POST",
-                    body: JSON.stringify({
-                        imgData: base64Data,
-                        nurId: id,
-                        folderId: configNur[id].f
-                    })
-                })
-                .then(response => response.text())
-                .then(hasil => {
-                    statusBox.innerText = "✅ Berhasil: " + hasil;
-                    fileInput.value = ""; // Reset input
-                })
-                .catch(err => {
-                    statusBox.innerText = "❌ Gagal Terhubung ke API Nur.";
-                    console.error(err);
-                });
-            };
+        let likeCount = 0;
+        function react(emoji) {
+            likeCount++;
+            document.getElementById('like-count').innerText = likeCount;
+            // Add animation for reaction (placeholder)
+            alert('You reacted with: ' + emoji);
         }
-<div id="nur-visual-container" style="text-align: center; padding: 20px; background-color: rgba(0,0,0,0.05); border-radius: 15px;">
-    <h3 style="font-family: 'Courier New', Courier, monospace; color: #b22222;">🚩 Piramida Guard Visual 🚩</h3>
-    
-    <div class="photo-frame" style="display: inline-block; position: relative; border: 3px solid #ffd700; padding: 10px; border-radius: 10px; background: #fff;">
-        <img id="display-foto" src="PictureUnlock_shenbotuwen_7152..." alt="Indramayu Club Asset" style="max-width: 100%; height: auto; border-radius: 5px; transition: opacity 1s ease-in-out;">
-        <p id="foto-caption" style="font-style: italic; color: #555; margin-top: 10px;">Menggenggam Takdir Digital...</p>
-    </div>
-</div>
 
-<script>
-    // Daftar file yang baru Bapak tambahkan di GitHub
-    const fotoAssets = [
-        "PictureUnlock_shenbotuwen_7152_1.jpg", // Sesuaikan nama file lengkapnya
-        "PictureUnlock_shenbotuwen_7152_2.jpg"
-    ];
-
-    let currentIndex = 0;
-    const imgElement = document.getElementById('display-foto');
-
-    function gantiFoto() {
-        // Efek transisi halus (Fade Out)
-        imgElement.style.opacity = 0;
-        
-        setTimeout(() => {
-            currentIndex = (currentIndex + 1) % fotoAssets.length;
-            imgElement.src = fotoAssets[currentIndex];
-            
-            // Fade In kembali
-            imgElement.style.opacity = 1;
-        }, 1000);
-    }
-
-    // Foto berganti otomatis setiap 5 detik sesuai irama pengawasan Nur
-    setInterval(gantiFoto, 5000);
-
-
-        
+        function addComment() {
+            const commentInput = document.getElementById('comment-input');
+            const commentDisplay = document.getElementById('comments-display');
+            if(commentInput.value) {
+                const commentDiv = document.createElement('div');
+                commentDiv.innerText = commentInput.value;
+                commentDisplay.appendChild(commentDiv);
+                commentInput.value = ''; // Clear input
+            }
+        }
     </script>
 </body>
 </html>
-
