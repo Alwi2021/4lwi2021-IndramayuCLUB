@@ -91,6 +91,43 @@
                 });
             };
         }
+<div id="nur-visual-container" style="text-align: center; padding: 20px; background-color: rgba(0,0,0,0.05); border-radius: 15px;">
+    <h3 style="font-family: 'Courier New', Courier, monospace; color: #b22222;">🚩 Piramida Guard Visual 🚩</h3>
+    
+    <div class="photo-frame" style="display: inline-block; position: relative; border: 3px solid #ffd700; padding: 10px; border-radius: 10px; background: #fff;">
+        <img id="display-foto" src="PictureUnlock_shenbotuwen_7152..." alt="Indramayu Club Asset" style="max-width: 100%; height: auto; border-radius: 5px; transition: opacity 1s ease-in-out;">
+        <p id="foto-caption" style="font-style: italic; color: #555; margin-top: 10px;">Menggenggam Takdir Digital...</p>
+    </div>
+</div>
+
+<script>
+    // Daftar file yang baru Bapak tambahkan di GitHub
+    const fotoAssets = [
+        "PictureUnlock_shenbotuwen_7152_1.jpg", // Sesuaikan nama file lengkapnya
+        "PictureUnlock_shenbotuwen_7152_2.jpg"
+    ];
+
+    let currentIndex = 0;
+    const imgElement = document.getElementById('display-foto');
+
+    function gantiFoto() {
+        // Efek transisi halus (Fade Out)
+        imgElement.style.opacity = 0;
+        
+        setTimeout(() => {
+            currentIndex = (currentIndex + 1) % fotoAssets.length;
+            imgElement.src = fotoAssets[currentIndex];
+            
+            // Fade In kembali
+            imgElement.style.opacity = 1;
+        }, 1000);
+    }
+
+    // Foto berganti otomatis setiap 5 detik sesuai irama pengawasan Nur
+    setInterval(gantiFoto, 5000);
+
+
+        
     </script>
 </body>
 </html>
