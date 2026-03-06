@@ -3,63 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indramayu CLUB</title>
+    <title>Document</title>
     <style>
-        /* Add styles for smooth transitions and animations */
-        .reaction {
+        /* Add necessary CSS for comment section and emoji reactions */
+        .comment-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .emoji {
             cursor: pointer;
-            transition: transform 0.2s; 
-        }
-        .reaction:hover {
-            transform: scale(1.2);
-        }
-        .comment-section {
-            margin-top: 20px;
+            font-size: 20px;
+            margin: 0 5px;
         }
     </style>
 </head>
 <body>
-    <h1>Indramayu CLUB</h1>
-    <!-- Existing Nur Upload functionality -->
-    <div id="upload-section">
-        <!-- Upload functionality here -->
+    <h1>Comments</h1>
+    <div id="comment-section">
+        <div class="comment-box">
+            <p>Sample Comment 1 <span class="emoji">😂</span><span class="emoji">❤️</span></p>
+        </div>
+        <div class="comment-box">
+            <p>Sample Comment 2 <span class="emoji">😍</span><span class="emoji">😢</span></p>
+        </div>
+        <div class="comment-box">
+            <p>Sample Comment 3 <span class="emoji">😡</span><span class="emoji">👍</span></p>
+        </div>
     </div>
-
-    <!-- Social Media Interaction Layer -->
-    <div id="reactions">
-        <span class="reaction" onclick="react('😂')">😂</span>
-        <span class="reaction" onclick="react('❤️')">❤️</span>
-        <span class="reaction" onclick="react('😍')">😍</span>
-        <span class="reaction" onclick="react('😢')">😢</span>
-        <span class="reaction" onclick="react('😡')">😡</span>
-        <span class="reaction" onclick="react('👍')">👍</span>
-    </div>
-    <div id="like-counter">Likes: <span id="like-count">0</span></div>
-    <div class="comment-section">
-        <h2>Comments:</h2>
-        <input type="text" id="comment-input" placeholder="Add a comment..." />
-        <button onclick="addComment()">Post</button>
-        <div id="comments-display"></div>
-    </div>
-
+    <input type="text" id="new-comment" placeholder="Add a comment...">
+    <button onclick="addComment()">Submit</button>
     <script>
-        let likeCount = 0;
-        function react(emoji) {
-            likeCount++;
-            document.getElementById('like-count').innerText = likeCount;
-            // Add animation for reaction (placeholder)
-            alert('You reacted with: ' + emoji);
-        }
-
         function addComment() {
-            const commentInput = document.getElementById('comment-input');
-            const commentDisplay = document.getElementById('comments-display');
-            if(commentInput.value) {
-                const commentDiv = document.createElement('div');
-                commentDiv.innerText = commentInput.value;
-                commentDisplay.appendChild(commentDiv);
-                commentInput.value = ''; // Clear input
-            }
+            const commentInput = document.getElementById('new-comment');
+            const newComment = commentInput.value;
+            const commentSection = document.getElementById('comment-section');
+            const commentBox = document.createElement('div');
+            commentBox.className = 'comment-box';
+            commentBox.innerHTML = `<p>${newComment} <span class='emoji'>😂</span><span class='emoji'>❤️</span></p>`;
+            commentSection.appendChild(commentBox);
+            commentInput.value = '';
         }
     </script>
 </body>
