@@ -1,0 +1,35 @@
+name: Piramida Guard Auto-Sync
+on:
+  schedule:
+    - cron: '0 5,12,15,18,19 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install gdown
+        run: pip install gdown
+
+      - name: Tarik Data Drive (AI_MUBIN)
+        run: |
+          gdown --id 1oi6tjbVQQkVOS2RbYt4G9TcC2h97o0ho -O AI_MUBIN_UPDATE.txt
+          # Tambahkan perintah gdown untuk link drive lainnya di sini
+
+      - name: Push Ke GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.PIRAMIDA_GUARD_TOKEN }}
+        run: |
+          git config --global user.name "Alwi2021"
+          git config --global user.email "indramayuclubmakrifat@gmail.com"
+          git add .
+          git commit -m "Nur 8: Backup Otomatis dari Drive" || exit 0
+          git push https://x-access-token:$GITHUB_TOKEN@github.com/Alwi2021/4lwi2021-IndramayuCLUB.git master
