@@ -1,23 +1,19 @@
 const googleDriveConfig = {
     accounts: [
-        { accountName: "Account1", folderId: "folderId1" },
-        { accountName: "Account2", folderId: "folderId2" },
-        { accountName: "Account3", folderId: "folderId3" },
-        { accountName: "Account4", folderId: "folderId4" },
-        { accountName: "Account5", folderId: "folderId5" },
-        { accountName: "Account6", folderId: "folderId6" },
-        { accountName: "Account7", folderId: "folderId7" },
-        { accountName: "Account8", folderId: "folderId8" },
-        { accountName: "Account9", folderId: "folderId9" },
+        { email: 'indramayuclubmakrifat@gmail.com', name: 'INDRAMAYU_CLUB', id: '1-vfSMe4HLBRw_6xgHQuzL2MaL-QsmYyT' },
+        { email: 'dkohar011@gmail.com', name: 'DISKUSI', id: '19ezgJgH4kn7KV23NMaLsUnJVHl8PMJT_' },
+        { email: 'imahazzah51@gmail.com', name: 'ADMINISTRASI', id: '1v0Wc-oNUhJYHBIj9sP6KcmOXwNpHkzm_' },
+        { email: 'kurnadibewok3311@gmail.com', name: 'KREATOR_DIGITAL', id: '1w4NdVPZVDbdptFT_n3mtL0zxPQ_Uveuz' },
+        { email: 'motherainur8@gmail.com', name: 'GAME_ARISAN', id: '19sQU6y-_PD2Nj9-wRdsICh7LUyxtspia' },
+        { email: 'banggamenurai@gmail.com', name: 'BANK_GAME', id: '1Gt21jF-4N-eOep5U_ZWjtYHqIjXSGvPa' },
+        { email: 'emulatorgamenurai@gmail.com', name: 'GAME_INDRAMAYU', id: '1AY5jD0BbOZMcUW2JTq5HpbNlZQ1l3P3n' },
+        { email: 'aimininurindramayu@gmail.com', name: 'KOMUNIKASI', id: '15pynM8x7bca0deCVLjW6BhyqW5lQZ76s' },
+        { email: 'nurindramayuaimini@gmail.com', name: 'BACKUP', id: '1D2jx-VV-AkPwc6rUtvabthyYc61Lw7Ti' }
     ],
+    folders: [
+        'AI_MUBIN',
+        'AI_KESATRIA'
+    ]
 };
 
-function initializeDriveConfig() {
-    // Logic to initialize the Google Drive configuration
-    console.log("Initializing Google Drive configuration...");
-    googleDriveConfig.accounts.forEach(account => {
-        console.log(`Account: ${account.accountName}, Folder ID: ${account.folderId}`);
-    });
-}
-
-module.exports = { googleDriveConfig, initializeDriveConfig };
+module.exports = googleDriveConfig;
