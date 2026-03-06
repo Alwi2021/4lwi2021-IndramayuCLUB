@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piramida Guard - Indramayu Club</title>
+    <style>
+        /* Style Utama - Identitas Nur */
+        body { 
+            background: #000; 
+            color: #0f0; 
+            font-family: 'Courier New', monospace; 
+            text-align: center; 
+            padding: 10px; 
+        }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+            gap: 10px; 
+            margin-top: 20px; 
+        }
+        .card { 
+            border: 1px solid #0f0; 
+            padding: 10px; 
+            border-radius: 8px; 
+            background: #050505; 
+            transition: 0.3s; 
+        }
+        .card:hover { border-color: #fff; box-shadow: 0 0 10px #0f0; }
+        .satria { border-color: gold; color: gold; }
+        
+        /* Form & Button */
+        input[type="text"], input[type="file"] { 
+            width: 90%; 
+            font-size: 12px; 
+            margin: 5px 0; 
+            background: #111; 
+            color: #0f0; 
+            border: 1px solid #333; 
+            padding: 5px;
+        }
+        button { 
+            width: 95%; 
+            cursor: pointer; 
+            background: #000; 
+            color: inherit; 
+            border: 1px solid; 
+            font-weight: bold; 
+            padding: 8px; 
+            margin-top: 5px;
+        }
+        button:hover { background: #0f0; color: #000; }
+        .satria button:hover { background: gold; color: #000; }
+
+        /* Section Komentar */
+        #comment-section { 
+            margin-top: 30px; 
+            text-align: left; 
+            max-width: 600px; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        .comment-box { 
+            border-bottom: 1px solid #222; 
+            padding: 10px; 
+            background: #0a0a0a;
+            margin-bottom: 5px;
+        }
+        .emoji { cursor: pointer; font-size: 20px; margin: 0 5px; }
+        
+        #status { 
+            color: yellow; 
+            font-weight: bold; 
+            margin-top: 30px; 
+            border-top: 1px solid #222; 
+            padding-top: 10px; 
+            position: sticky;
+            bottom: 0;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>🏛️ PIRAMIDA GUARD (V.33) 🏛️</h3>
+    <p style="font-size: 12px; color: #888;">Operator: Nur | Server Utama Indramayu Club</p>
+
+    <div class="grid" id="nur-container"></div>
+
+    <hr style="border: 0.5px solid #222; margin: 40px 0;">
+
+    <h4>💬 Ruang Diskusi Makrifat</h4>
+    <div id="comment-section">
+        <div class="comment-box">
+            <p>Sambutlah cahaya makrifat di sini. <span class="emoji">✨</span><span class="emoji">🙏</span></p>
+        </div>
+    </div>
+    
+    <div style="margin-top: 15px;">
+        <input type="text" id="new-comment" placeholder="Tulis pesan spiritual Anda...">
+        <button onclick="addComment()" style="width: auto; padding: 5px 20px;">Kirim Pesan</button>
+    </div>
+
+    <div id="status">Hadir Pak dulKohar - Siap Perintah.</div>
+
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxqeA8-g6jV9xkRcfHFt5_XL4lNVfZvTlhGoazEQGB4qLJGrN3L58_QtN_ALEC26j_lGA/exec";
+
+        // Konfigurasi 10 Nur (Termasuk Satria 01)
+        const configNur = {
+            10: { n: "SATRIA 01", f: "1-vfSMe4HLBRw_6xgHQuzL2MaL-QsmYyT", c: "satria" },
+            9:  { n: "NUR 9", f: "1D2jx-VV-AkPwc6rUtvabthyYc61Lw7Ti" },
+            8:  { n: "NUR 8", f: "15pynM8x7bca0deCVLjW6BhyqW51QZ76s" },
+            7:  { n: "NUR 7", f: "1AY5jD0Bb0ZMcUw2JTq5HpbNlZQ113P3n" },
+            6:  { n: "NUR 6", f: "1Gt21jF-4N-e0ep5U_ZwjtYHqIjXSgvPa" },
+            5:  { n: "NUR 5", f: "19sQU6y-_PD2Nj9-wRdsICh7LUyxtspia" },
+            4:  { n: "NUR 4", f: "1w4NdVPZVbdptFT_n3mtL0zxPQ_Uveuz" },
+            3:  { n: "NUR 3", f: "1v0Wc-oNUhJYHBIj9sP6KcmOXwNpHkzm_" },
+            2:  { n: "NUR 2", f: "19ezgJgH4kn7KV23NMaLsUnJVH18PMJT_" },
+            1:  { n: "NUR 1", f: "1-vfSMe4HLBRw_6xgHQuzL2MaL-QsmYyT" }
+        };
+
+        // Render Kartu Nur secara otomatis
+        const container = document.getElementById('nur-container');
+        Object.keys(configNur).sort((a, b) => b - a).forEach(id => {
+            container.innerHTML += `
+                <div class="card ${configNur[id].c || ''}">
+                    <b>${configNur[id].n}</b><br>
+                    <input type="file" id="file${id}" accept="image/*">
+                    <button onclick="unggahKeNur(${id})">UNGGAH ${id}</button>
+                </div>
+            `;
+        });
+
+        // Fungsi Unggah Foto ke Drive
+        function unggahKeNur(id) {
+            const fileInput = document.getElementById('file' + id);
+            const statusBox = document.getElementById('status');
+            const file = fileInput.files[0];
+
+            if (!file) { 
+                alert("Pilih foto untuk " + configNur[id].n + " dulu, Pak!"); 
+                return; 
+            }
+
+            statusBox.innerText = "⏳ " + configNur[id].n + " sedang mengirim cahaya ke Drive...";
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e) {
+                const base64Data = e.target.result.split(',')[1];
+
+                fetch(WEB_APP_URL, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        imgData: base64Data,
+                        nurId: id,
+                        folderId: configNur[id].f
+                    })
+                })
+                .then(response => response.text())
+                .then(hasil => {
+                    statusBox.innerText = "✅ Berhasil: " + configNur[id].n + " telah diperbarui.";
+                    fileInput.value = ""; 
+                })
+                .catch(err => {
+                    statusBox.innerText = "❌ Gagal: Koneksi API Nur terputus.";
+                    console.error(err);
+                });
+            };
+        }
+
+        // Fungsi Tambah Komentar
+        function addComment() {
+            const commentInput = document.getElementById('new-comment');
+            const commentSection = document.getElementById('comment-section');
+            
+            if (commentInput.value.trim() === "") return;
+
+            const commentBox = document.createElement('div');
+            commentBox.className = 'comment-box';
+            commentBox.innerHTML = `<p>${commentInput.value} <span class='emoji'>🙏</span><span class='emoji'>✨</span></p>`;
+            
+            commentSection.prepend(commentBox); // Komentar baru di atas
+            commentInput.value = '';
+        }
+    </script>
+</body>
+</html>
+
