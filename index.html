@@ -1,23 +1,35 @@
-<script src="google-drive-config.js"></script>
-<script>
-function initGoogleDriveConnections() {
-    // Initialize connections for all 9 accounts
-    const accounts = [
-        'account1@example.com',
-        'account2@example.com',
-        'account3@example.com',
-        'account4@example.com',
-        'account5@example.com',
-        'account6@example.com',
-        'account7@example.com',
-        'account8@example.com',
-        'account9@example.com'
-    ];
-    // Add logic to initialize all accounts
-    accounts.forEach(email => {
-        // Initialization logic here
-        console.log('Initialized Google Drive for:', email);
-    });
-}
-</script>
-<script>initGoogleDriveConnections();</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Drive Integration</title>
+    <script src="google-drive-config.js"></script>
+    <style>
+        .folder-card {
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Drive Accounts</h1>
+    <div id="folders-container"></div>
+    <script>
+        const accounts = googleDriveConfig.accounts;
+        const container = document.getElementById('folders-container');
+
+        accounts.forEach(account => {
+            const card = document.createElement('div');
+            card.className = 'folder-card';
+            
+            card.innerHTML = `<h2>${account.email}</h2>
+                <p>Folder Name: ${account.folderName}</p>
+                <p>Folder ID: ${account.folderId}</p>`;
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>
