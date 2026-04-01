@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indramayu CLUB - Vehicle Combat</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0b0e0e; /* Warna gelap dasar */
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.main-container {
+    max-width: 600px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+/* Tag Biru Kecil di Atas */
+.top-tag {
+    display: inline-block;
+    background-color: rgba(0, 255, 255, 0.1);
+    color: #00e5ff;
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    margin-bottom: 30px;
+}
+
+/* Styling Judul */
+.main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    /* Efek Glow Tipis */
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.highlight {
+    color: #f1f100; /* Warna kuning pada 'CLUB' */
+}
+
+/* Styling Deskripsi */
+.description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #b0b0b0;
+    margin-bottom: 40px;
+}
+
+.description strong {
+    color: #ffffff;
+}
+
+/* Kotak Video */
+.video-wrapper {
+    width: 100%;
+    background-color: #000;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tombol-tombol */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn {
+    text-decoration: none;
+    font-weight: 700;
+    padding: 18px;
+    border-radius: 50px;
+    transition: 0.3s;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.btn-primary:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.02);
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+</style>
+<body>
+
+    <div class="main-container">
+        <div class="top-tag">
+            INDRAMAYU, INDONESIA • TACTICAL COMBAT
+        </div>
+
+        <h1 class="main-title">Indramayu<span class="highlight">CLUB</span></h1>
+
+        <p class="description">
+            A high-stakes, token-based vehicle combat game set in the coastal heart of Java. 
+            Experience the thrill of the <strong>Jalur Pantura</strong> under the shadow of the Balongan Refinery.
+        </p>
+
+        <div class="video-wrapper">
+            <video controls poster="link-ke-thumbnail-kamu.jpg">
+                <source src="video-game-kamu.mp4" type="video/mp4">
+                Browser kamu tidak mendukung video.
+            </video>
+        </div>
+
+        <div class="button-group">
+            <a href="#" class="btn btn-primary">LAUNCH CAMPAIGN</a>
+            <a href="#" class="btn btn-secondary">VIEW ARCHIVES</a>
+        </div>
+    </div>
+
+</body>
+</html>
